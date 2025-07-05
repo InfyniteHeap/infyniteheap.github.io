@@ -1,6 +1,0 @@
-baseURL = "https://infyniteheap.github.io"
-languageCode = "zh-cn"
-title = "InfyniteHeap"
-
-[[module.imports]]
-path = "github.com/CaiJimmy/hugo-theme-stack/v3"
