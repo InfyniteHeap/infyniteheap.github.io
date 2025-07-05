@@ -1,5 +1,5 @@
 ---
-title: "{{ replace .File.ContentBaseName '-' ' ' | title }}"
+title: "{{ .File.ContentBaseName | title }}"
 description:
 slug:
 date: "{{ .Date }}"
