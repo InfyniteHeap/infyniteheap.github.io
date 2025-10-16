@@ -26,7 +26,7 @@ LRU 和 LFU 的核心是链式哈希表。该数据结构有如下特点：
 
 部分编程语言已经内置了这种数据结构，允许开发者直接使用：
 
-- Java：[`LinkedHashMap`](https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/LinkedHashMap.html)。
+- Java：[`LinkedHashMap`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/LinkedHashMap.html)。
 - Python：自 3.7 版本起，Python 内置的[`dict`](https://docs.python.org/3/library/stdtypes.html#mapping-types-dict)便已符合上述特点。当然，考虑到我们有将数据移动到双向链表头/尾的需求，我们一般会使用[`collections.OrderedDict`](https://docs.python.org/3/library/collections.html#collections.OrderedDict)，因为它包含诸如`move_to_end`等这样方便的高级方法。
 - JavaScript/TypeScript：[`Map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)。
 
@@ -83,7 +83,6 @@ class LFUCache:
         del self.freq_to_keys[freq][key]
         if len(self.freq_to_keys[freq]) == 0:
             del self.freq_to_keys[freq]
-
             if freq == self.min_freq:
                 self.min_freq += 1
 
@@ -703,6 +702,9 @@ fn put(&mut self, key: i32, value: i32) {
 那么，这篇文章就到这里了！希望读者读完本文后可以加深对双向链表、哈希表、LRU 和 LFU 的理解！
 
 [^1]: 要想利用语言内置的双向链表和哈希表手动实现链式哈希表，一个最重要的条件是，我们要能很方便地获取并存储指向双向链表节点的指针，以保证增删查改的时间复杂度均为 O(1)。
+
 [^2]: 虽然 .NET 已内置[`OrderedDictionary`](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ordereddictionary-2)，但由于其底层数据结构为数组和哈希表，因此，其`Remove`方法时间复杂度为 O(N)，不符合链式哈希表的第二个特点。
+
 [^3]: crates.io 上有一个社区实现的[`IndexMap`](https://crates.io/crates/indexmap)，它可以保证插入元素的顺序。但由于其底层数据结构也为数组和哈希表（和 .NET 的`OrderedDictionary`一样），因此，其`shift_remove`方法时间复杂度为 O(N)，而`swap_remove`方法会破坏元素插入顺序，均不符合链式哈希表的第二个特点。
+
 [^4]: 虽然 Rust 也可以直接使用裸指针，即`*const Type`和`*mut Type`，但 Rust 不鼓励使用它们。除非需要与外部函数打交道，或需要极致性能优化，否则使用`Option<Rc<RefCell<Node<E>>>>`足矣。在保证性能与裸指针不会相差较大的同时，还能最大限度地保障内存安全。
