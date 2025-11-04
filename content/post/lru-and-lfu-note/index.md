@@ -38,7 +38,7 @@ from collections import OrderedDict
 
 class LRUCache:
     # 使用__slots__属性以提高访问类内属性的速度
-    __slots__ = ["cache", "cap"]
+    __slots__: list[str] = ["cache", "cap"]
 
     def __init__(self, capacity: int) -> None:
         # 显式标注类型可提升代码可读性，以及开发时的code lint体验
@@ -49,15 +49,18 @@ class LRUCache:
         if key not in self.cache:
             return -1
 
-        self.cache.move_to_end(key)
+        self.cache.move_to_end(key, last=False)
         return self.cache[key]
 
     def put(self, key: int, value: int) -> None:
+        if self.cap == 0:
+            return
+
         self.cache[key] = value
-        self.cache.move_to_end(key)
+        self.cache.move_to_end(key, last=False)
 
         if len(self.cache) > self.cap:
-            self.cache.popitem(last=False)
+            _ = self.cache.popitem()
 ```
 
 LFU 实现如下：
@@ -67,7 +70,13 @@ from collections import OrderedDict
 
 
 class LFUCache:
-    __slots__ = ["key_to_value", "key_to_freq", "freq_to_keys", "min_freq", "cap"]
+    __slots__: list[str] = [
+        "key_to_value",
+        "key_to_freq",
+        "freq_to_keys",
+        "min_freq",
+        "cap",
+    ]
 
     def __init__(self, capacity: int) -> None:
         self.key_to_value: dict[int, int] = {}
@@ -107,7 +116,7 @@ class LFUCache:
         return self.key_to_value[key]
 
     def put(self, key: int, value: int) -> None:
-        if self.cap <= 0:
+        if self.cap == 0:
             return
 
         if key in self.key_to_value:
@@ -116,14 +125,14 @@ class LFUCache:
 
             return
 
-        if len(self.key_to_value) >= self.cap:
-            self.remove_min_freq_key()
-
         self.key_to_value[key] = value
         self.key_to_freq[key] = 1
         if 1 not in self.freq_to_keys:
             self.freq_to_keys[1] = OrderedDict()
         self.freq_to_keys[1][key] = None
+
+        if len(self.key_to_value) > self.cap:
+            self.remove_min_freq_key()
 
         self.min_freq = 1
 ```
