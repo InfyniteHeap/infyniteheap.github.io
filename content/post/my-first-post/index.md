@@ -1,7 +1,7 @@
 ---
 title: "我的第一篇文章"
 description: "打招呼，以及简述自建博客的原因。"
-slug:
+slug: "my-first-post"
 date: "2025-07-04T20:42:42+08:00"
 image: citlali.png
 categories:

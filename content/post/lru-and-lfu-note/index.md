@@ -1,7 +1,7 @@
 ---
 title: "LRU和LFU笔记"
 description: "讲解实现LRU和LFU的步骤，顺便讲解实现链式哈希表的步骤。"
-slug:
+slug: "lru-and-lfu-note"
 date: "2025-08-09T07:30:16+08:00"
 image: nahida.jpg
 categories:

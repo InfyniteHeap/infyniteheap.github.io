@@ -1,7 +1,7 @@
 ---
 title: "Rust生命周期简单理解"
 description: "尝试以简单的方式解释Rust生命周期标注概念，帮助Rust程序员理解这一难点。"
-slug:
+slug: "rust-lifetime-annotation"
 date: "2025-07-05T19:06:06+08:00"
 image: ruan-mei.jpg
 categories:
