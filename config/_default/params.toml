@@ -2,19 +2,19 @@
 mainSections = ["post"]
 # Output page's full content in RSS.
 rssFullContent = true
-favicon = "/favicon.png"
+favicon = "/favicon.ico"
 
 [dateFormat]
 published = "Jan 02, 2006"
 lastUpdated = "Jan 02, 2006 15:04 MST"
 
 [sidebar]
-subtitle = "激起往昔的涟漪！(≧∀≦)ゞ"
+subtitle = "记忆是蓝色的"
 
 [sidebar.avatar]
 enabled = true
 local = true
-src = "cyrene-avatar.png"
+src = "evanescia-avatar.jpeg"
 
 [article]
 headingAnchor = false
