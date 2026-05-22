@@ -9,12 +9,12 @@ published = "Jan 02, 2006"
 lastUpdated = "Jan 02, 2006 15:04 MST"
 
 [sidebar]
-subtitle = "记忆是蓝色的"
+subtitle = "记忆是……蓝色的？粉色的！"
 
 [sidebar.avatar]
 enabled = true
 local = true
-src = "evanescia-avatar.jpeg"
+src = "evanescia-avatar.png"
 
 [article]
 headingAnchor = false
