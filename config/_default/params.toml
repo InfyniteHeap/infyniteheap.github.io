@@ -14,7 +14,7 @@ subtitle = "记忆是……蓝色的？粉色的！"
 [sidebar.avatar]
 enabled = true
 local = true
-src = "citlali-avatar.png"
+src = "citlali-avatar.jpg"
 
 [article]
 headingAnchor = false
