@@ -26,7 +26,7 @@ LRU 和 LFU 的核心是链式哈希表。该数据结构有如下特点：
 
 部分编程语言已经内置了这种数据结构，允许开发者直接使用：
 
-- Java：[`LinkedHashMap`](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/LinkedHashMap.html)。
+- Java：[`LinkedHashMap`](https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/util/LinkedHashMap.html)。
 - Python：自 3.7 版本起，Python 内置的[`dict`](https://docs.python.org/3/library/stdtypes.html#mapping-types-dict)便已符合上述特点。当然，考虑到我们有将数据移动到双向链表头/尾的需求，我们一般会使用[`collections.OrderedDict`](https://docs.python.org/3/library/collections.html#collections.OrderedDict)，因为它包含诸如`move_to_end`等这样方便的高级方法。
 - JavaScript/TypeScript：[`Map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)。
 
