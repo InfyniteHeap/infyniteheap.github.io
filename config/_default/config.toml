@@ -14,7 +14,7 @@ hasCJKLanguage = true
 
 # Change it to your Disqus shortname before using
 [services.disqus]
-shortname = "hugo-theme-stack"
+shortname = "infyniteheap"
 
 [pagination]
 pagerSize = 5

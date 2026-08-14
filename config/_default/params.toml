@@ -98,7 +98,7 @@ functional = true
 
 ## Comments
 [comments]
-enabled = true
+enabled = false
 provider = "disqus"
 
 [comments.artalk]
