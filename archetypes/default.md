@@ -1,10 +1,12 @@
 ---
-title: "{{ .File.ContentBaseName | title }}"
+title: "{{ replace .Name "-" " " | title }}"
 description:
-slug:
-date: "{{ .Date }}"
+date: {{ .Date }}
 image:
-categories:
-tags:
-weight: 1 # You can add weight to some posts to override the default sorting (date descending)
+math:
+license:
+comments: true
+draft: true
+build:
+    list: always # Change to "never" to hide the page from the list
 ---

@@ -10,7 +10,6 @@ tags:
   - 数据结构与算法
   - LRU
   - LFU
-weight: 1
 ---
 
 近日，笔者在 LeetCode 上刷到了[146. LRU 缓存](https://leetcode.cn/problems/lru-cache/description/)和[460. LFU 缓存](https://leetcode.cn/problems/lfu-cache/description/)这两道题。虽然这两种数据结构工作原理不难理解，但是实现它们却并非易事。因此，笔者撰写本篇文章，旨在带领读者自下至上逐步实现这两种数据结构。

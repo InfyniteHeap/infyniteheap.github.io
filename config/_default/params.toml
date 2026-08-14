@@ -2,73 +2,108 @@
 mainSections = ["post"]
 # Output page's full content in RSS.
 rssFullContent = true
+# Accepted values: "default", "lastmod"
+# default = see https://gohugo.io/quick-reference/glossary/#default-sort-order
+# lastmod = sort by last modified date, in descending order
+SortBy = "default"
+
 favicon = "/favicon.ico"
+
+[footer]
+since = 2025
+customText = ""
 
 [dateFormat]
 published = "Jan 02, 2006"
 lastUpdated = "Jan 02, 2006 15:04 MST"
 
 [sidebar]
+compact = false
+emoji = ""
 subtitle = "记忆是……蓝色的？粉色的！"
 avatar = "citlali-avatar.jpg"
 
 [article]
 headingAnchor = false
 math = false
+toc = true
 readingTime = true
+
+[article.list]
+# Showing article tags in the list view (e.g. homepage, section pages)
+showTags = false
 
 [article.license]
 enabled = true
 default = "Licensed under CC BY-NC-SA 4.0"
 
+# Mermaid diagram configuration
+# Diagrams are only loaded when mermaid code blocks are present
+# Theme auto-switches based on site light/dark mode
+[article.mermaid]
+look = "classic"
+lightTheme = "default"
+darkTheme = "dark"
+securityLevel = "strict"
+htmlLabels = true
+transparentBackground = false
+
+[article.alertIcon]
+note = "📝"
+tip = "💡"
+important = "📌"
+warning = "⚠️"
+caution = "🚨"
+
 ## Widgets
-[[widgets.homepage]]
-type = "search"
-
-[[widgets.homepage]]
-type = "archives"
-
-[widgets.homepage.params]
-limit = 5
-
-[[widgets.homepage]]
-type = "categories"
-
-[widgets.homepage.params]
-limit = 10
-
-[[widgets.homepage]]
-type = "tag-cloud"
-
-[widgets.homepage.params]
-limit = 10
-
-[[widgets.page]]
-type = "toc"
+[widgets]
+homepage = [
+  { type = "search" },
+  { type = "archives", params = { limit = 5 } },
+  { type = "categories", params = { limit = 10 } },
+  { type = "tag-cloud", params = { limit = 10 } },
+]
+page = [{ type = "toc" }]
 
 [opengraph.twitter]
 site = ""
 card = "summary_large_image"
 
-[defaultImage.opengraph]
-enabled = false
-local = false
-src = ""
-
 [colorScheme]
 toggle = true
 default = "auto"
 
-[imageProcessing.cover]
-enabled = true
+[imageProcessing]
+autoOrient = false
+
+[imageProcessing.external]
+timeout = "5s"
 
 [imageProcessing.content]
+widths = [800, 1600, 2400]
 enabled = true
+
+[imageProcessing.thumbnail]
+enabled = true
+
+# GDPR Cookie Consent Configuration
+# When enabled, analytics and functional cookies require user consent
+[cookies]
+enabled = false
+showSettings = true
+
+[cookies.categories]
+analytics = true
+functional = true
 
 ## Comments
 [comments]
 enabled = true
 provider = "disqus"
+
+[comments.artalk]
+serverUrl = ""
+site = ""
 
 [comments.disqusjs]
 shortname = ""
@@ -82,10 +117,18 @@ repo = ""
 issueTerm = "pathname"
 label = ""
 
+[comments.beaudar]
+repo = ""
+issueTerm = "pathname"
+label = ""
+theme = ""
+
 [comments.remark42]
 host = ""
 site = ""
-locale = ""
+locale = "en"
+max_shown_comments = 15
+show_email_subscription = true
 
 [comments.vssue]
 platform = ""
@@ -95,17 +138,17 @@ clientId = ""
 clientSecret = ""
 autoCreateIssue = false
 
+# Waline client configuration see: https://waline.js.org/en/reference/component.html
 [comments.waline]
 serverURL = ""
 lang = ""
-visitor = ""
-avatar = ""
-emoji = ["https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo"]
+pageview = ""
+emoji = ["https://unpkg.com/@waline/emojis@1.0.1/weibo"]
 requiredMeta = ["name", "email", "url"]
-placeholder = ""
 
 [comments.waline.locale]
 admin = "Admin"
+placeholder = ""
 
 [comments.twikoo]
 envId = ""
@@ -113,6 +156,7 @@ region = ""
 path = ""
 lang = ""
 
+# See https://cactus.chat/docs/reference/web-client/#configuration for description of the various options
 [comments.cactus]
 defaultHomeserverUrl = "https://matrix.cactus.chat:8448"
 serverName = "cactus.chat"
@@ -123,11 +167,15 @@ repo = ""
 repoID = ""
 category = ""
 categoryID = ""
-mapping = ""
-lightTheme = ""
-darkTheme = ""
+mapping = "title"
+lightTheme = "light"
+darkTheme = "dark_dimmed"
 reactionsEnabled = 1
 emitMetadata = 0
+inputPosition = "top"
+lang = "en"
+strict = 0
+loading = "lazy"
 
 [comments.gitalk]
 owner = ""
@@ -135,7 +183,20 @@ admin = ""
 repo = ""
 clientID = ""
 clientSecret = ""
+proxy = ""
 
 [comments.cusdis]
-host = ""
+host = "https://cusdis.com"
 id = ""
+
+# Comentario client configuration
+[comments.comentario]
+url = ""
+autoInit = false
+autoNonInteractiveSso = false
+cssOverride = ""
+lang = ""
+liveUpdate = false
+maxLevel = 0
+noFonts = false
+theme = ""
