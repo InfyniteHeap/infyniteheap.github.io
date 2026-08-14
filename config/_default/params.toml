@@ -7,7 +7,7 @@ rssFullContent = true
 # lastmod = sort by last modified date, in descending order
 SortBy = "default"
 
-favicon = "/favicon.ico"
+favicon = "favicon.ico"
 
 [footer]
 since = 2025
