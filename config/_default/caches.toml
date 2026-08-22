@@ -1,0 +1,6 @@
+# Redirect the image cache to the shared cache directory so that CI/CD
+# platforms can persist it between builds.
+# See https://gohugo.io/host-and-deploy/host-on-github-pages/
+[caches]
+  [caches.images]
+    dir = ':cacheDir/images'

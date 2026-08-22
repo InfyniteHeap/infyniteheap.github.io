@@ -17,20 +17,54 @@ jobs:
       # added or changed files to the repository.
       contents: write
 
+    env:
+      # Tool versions, kept in sync with deploy.yml so the verification build
+      # matches production. A theme update that breaks this build is not committed.
+      DART_SASS_VERSION: 1.102.0
+      GO_VERSION: 1.26.5
+      HUGO_VERSION: 0.165.0
+      TZ: Asia/Shanghai
+
     steps:
       - uses: actions/checkout@v7
-
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: "latest"
-          extended: true
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Create a local tools directory
+        run: |
+          mkdir -p "${HOME}/.local"
+
+      - name: Install Go
+        if: hashFiles('go.mod') != ''
+        uses: actions/setup-go@v6
+        with:
+          go-version: ${{ env.GO_VERSION }}
+          cache: false
+
+      - name: Install Dart Sass
+        run: |
+          echo "Installing Dart Sass ${DART_SASS_VERSION}..."
+          curl -sfL --output-dir "${{ runner.temp }}" -O "https://github.com/sass/dart-sass/releases/download/${DART_SASS_VERSION}/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz"
+          tar -C "${HOME}/.local" -xf "${{ runner.temp }}/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz"
+          echo "${HOME}/.local/dart-sass" >> "${GITHUB_PATH}"
+
+      - name: Install Hugo
+        run: |
+          echo "Installing Hugo ${HUGO_VERSION}..."
+          curl -sfL --output-dir "${{ runner.temp }}" -O "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_linux-amd64.tar.gz"
+          mkdir "${HOME}/.local/hugo"
+          tar -C "${HOME}/.local/hugo" -xf "${{ runner.temp }}/hugo_${HUGO_VERSION}_linux-amd64.tar.gz"
+          echo "${HOME}/.local/hugo" >> "${GITHUB_PATH}"
 
       - name: Update theme
         run: hugo mod get -u
 
       - name: Tidy go.mod, go.sum
         run: hugo mod tidy
+
+      - name: Verify build
+        run: hugo build --gc --minify
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v7
