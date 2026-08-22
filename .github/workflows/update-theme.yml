@@ -18,11 +18,10 @@ jobs:
       contents: write
 
     env:
-      # Tool versions, kept in sync with deploy.yml so the verification build
-      # matches production. A theme update that breaks this build is not committed.
-      DART_SASS_VERSION: 1.102.0
-      GO_VERSION: 1.26.5
-      HUGO_VERSION: 0.165.0
+      # Always-latest toolchains, same strategy as deploy.yml.
+      # The verification build below gates the commit: a theme update that
+      # breaks against the latest toolchain is never pushed.
+      GO_VERSION: stable
       TZ: Asia/Shanghai
 
     steps:
@@ -37,13 +36,14 @@ jobs:
 
       - name: Install Go
         if: hashFiles('go.mod') != ''
-        uses: actions/setup-go@v6
+        uses: actions/setup-go@v7
         with:
           go-version: ${{ env.GO_VERSION }}
           cache: false
 
       - name: Install Dart Sass
         run: |
+          DART_SASS_VERSION="$(curl -sfL -H "Authorization: Bearer ${{ github.token }}" https://api.github.com/repos/sass/dart-sass/releases/latest | jq -r .tag_name)"
           echo "Installing Dart Sass ${DART_SASS_VERSION}..."
           curl -sfL --output-dir "${{ runner.temp }}" -O "https://github.com/sass/dart-sass/releases/download/${DART_SASS_VERSION}/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz"
           tar -C "${HOME}/.local" -xf "${{ runner.temp }}/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz"
@@ -51,6 +51,7 @@ jobs:
 
       - name: Install Hugo
         run: |
+          HUGO_VERSION="$(curl -sfL -H "Authorization: Bearer ${{ github.token }}" https://api.github.com/repos/gohugoio/hugo/releases/latest | jq -r .tag_name | sed 's/^v//')"
           echo "Installing Hugo ${HUGO_VERSION}..."
           curl -sfL --output-dir "${{ runner.temp }}" -O "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_linux-amd64.tar.gz"
           mkdir "${HOME}/.local/hugo"
