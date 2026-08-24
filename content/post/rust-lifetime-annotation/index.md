@@ -8,6 +8,8 @@ categories:
   - 计算机软件
 tags:
   - Rust
+math:
+toc:
 ---
 
 > 本文假设读者已有一定 Rust 编程经验，至少能理解所有权和借用的概念与规则。
