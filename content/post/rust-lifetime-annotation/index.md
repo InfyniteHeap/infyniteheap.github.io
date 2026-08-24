@@ -1,13 +1,14 @@
 ---
-title: "Rust生命周期简单理解"
-description: "尝试以简单的方式解释Rust生命周期标注概念，帮助Rust程序员理解这一难点。"
+title: "Rust 生命周期简单理解"
+description: "尝试以简单的方式解释 Rust 生命周期标注概念，帮助 Rust 程序员理解这一难点。"
 slug: "rust-lifetime-annotation"
 date: "2025-07-05T19:06:06+08:00"
 image: ruan-mei.jpg
 categories:
-  - 计算机软件
+  - 计算机科学
 tags:
   - Rust
+  - 生命周期
 math:
 toc:
 ---

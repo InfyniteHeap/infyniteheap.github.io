@@ -1,11 +1,11 @@
 ---
-title: "LRU和LFU笔记"
-description: "讲解实现LRU和LFU的步骤，顺便讲解实现链式哈希表的步骤。"
+title: "LRU 和 LFU 笔记"
+description: "讲解实现 LRU 和 LFU 的步骤，顺便讲解实现链式哈希表的步骤。"
 slug: "lru-and-lfu-note"
 date: "2025-08-09T07:30:16+08:00"
 image: nahida.jpg
 categories:
-  - 计算机软件
+  - 计算机科学
 tags:
   - 数据结构与算法
   - LRU
